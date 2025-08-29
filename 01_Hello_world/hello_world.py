@@ -15,10 +15,10 @@ janela.iconbitmap("01_Hello_world/snowflake.ico")
 #tamanho
 janela.geometry("800x400+100+200")
 
-#
+#aumente ou diminue minha janela
 janela.resizable(False,False)
 
-#criando bem vindo
+#criando bem vindo, são teextos
 label_titulo = tk.Label(janela,
                         text="Bem vindo!",
                         bg="purple",
@@ -35,15 +35,24 @@ label_text.pack()
 entry_nome = tk.Entry(janela)
 entry_nome.pack()
 
+
+#diga bom dia ao pressionar o botao
+def button_bomdia():
+    """essa função pega o nome que esta digitado na caixa de texto e deseja bom dia"""
+    nome = entry_nome.get()
+    label_result.configure(text=f"Bom dia, {nome}")
+
 #botao pro bom dia
 button_bomdia = tk.Button(janela,
-                          text="Diga bom dia")
+                          text="deseje bom dia",
+                          command=button_bomdia)
 button_bomdia.pack()
 
-#dizendo bom dia
-label_bomdia = tk.Label(janela,
-                        text=f"Bom dia,")
-label_bomdia.pack()
+label_result = tk.Label(janela,
+                        text="")
+label_result.pack()
+
+
 
 
 #loop pra manter janela aberta
