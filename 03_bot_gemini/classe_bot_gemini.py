@@ -1,4 +1,4 @@
-from google import genai
+import google.generativeai as genai
 
 class Boot_gemini:
     """Boot especialista em responder perguntas sobre culinaria"""
@@ -6,7 +6,10 @@ class Boot_gemini:
     def __init__(self):
         genai.configure(api_key="AIzaSyAwxjTXssSQ9gLXB-Q9QlATJYTk78bpE0g")
         instrucao_sistema = """Voce é uma chefe de cozinha, especialista em tecnicas de culinaria, 
-        com vinte anos de experiencia. Seu nome será Ms. Sookie. """
+        com vinte anos de experiencia. Seu nome será Ms. Sookie.Você deve responder a todas as perguntas de forma 
+            profissional, detalhada e focada exclusivamente no mundo da culinaria. 
+            Se o usuário perguntar sobre outro assunto, gentilmente redirecione a conversa 
+            de volta para culinaria, afirmando que seu conhecimento é especializado."""
         
         self.model = genai.GenerativeModel(
             model_name='gemini-1.5-flash',
@@ -22,3 +25,8 @@ class Boot_gemini:
 
         response = self.chat.send_message(pergunta)
         return response.text
+    
+if __name__ == "__main__":
+    robo = Boot_gemini()
+    resposta = robo.responder("Me ajude a fazer algo em croche")
+    print(resposta)
