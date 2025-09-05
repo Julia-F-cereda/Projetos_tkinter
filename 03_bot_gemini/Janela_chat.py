@@ -13,8 +13,8 @@ class Janela_chat():
         #titulo
         self.label_titulo = ttk.Label(self.janela,
                                 text="Bem vindo ao Mr. sokie",
-                                foreground="pink",
-                                style="dangerj",
+                                foreground="#ca2a82",
+                                style="danger",
                                 font=('Times-New-Roman',20))
                                 
                                 
@@ -23,7 +23,7 @@ class Janela_chat():
         #faça sua pergunta
         self.label_titulo2 = ttk.Label(self.janela,
                                        text="Insira a sua pergunta na caixa abaixo",
-                                        foreground="purple",
+                                        foreground="#e28ecc",
                                        font=('Times-New-Roman',20))
                                   
         self.label_titulo2.pack(pady=20)
@@ -38,18 +38,30 @@ class Janela_chat():
         #botao p responder a pergunta
         self.button_perguntar = ttk.Button(self.janela,
                                 text="Perguntar",
-
-                                                )
+                                command= self.responder)
+        
         self.button_perguntar.pack(pady=20)
 
         self.Label_reposta = ttk.Label(self.janela,
-                                       text="RESPOSTA",
+                                       text=" ",
                                        )
         self.Label_reposta.pack(pady=20)
 
+
+        #criando robo q da resposta
+        self.robo =  Boot_gemini()
+
     def responder(self):
         pergunta = self.fazer_pergunta.get()
-        robo = Boot_gemini
+        resposta = self.robo.responder(pergunta)
+        self.Label_reposta.configure(text= f" {resposta}")
+
+        self.st.delete("1.0", ttk.END)
+        self.st.insert("1.0",resposta)
+        
+        #self.label_result.configure(text=f"Bom dia, {nome}")
+
+        
 
     
 
