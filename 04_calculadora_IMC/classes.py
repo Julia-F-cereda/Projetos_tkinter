@@ -1,4 +1,5 @@
 import ttkbootstrap as ttk
+import messagebox as tkinter
 class Classes():
     def __init__(self):
 
@@ -73,10 +74,33 @@ class Classes():
             #fazendo a divisão
 
             resultado_div = (peso) / (altura ** 2)
-            self.Label_resultado.config(text=f"seu IMC é:{resultado_div:.2f}")
+
+            # classificação
+            if resultado_div<18.5:
+                classificacao = "Abaixo do peso"
+
+            elif resultado_div<24.9:
+                classificacao = "Normoponderal"
+
+            elif resultado_div<29.9:
+                classificacao = "Pre-obesidade"
+                                                                                                                                                                     
+            elif resultado_div<34.9:
+                classificacao = "Obesidade grau 1"
+                
+            elif resultado_div<39.9:
+                classificacao = "obesidade grau 2"
+
+            elif resultado_div<40:
+                classificacao = "obesidade morbida"
+
+
+            self.Label_resultado.config(text=f"seu IMC é:{resultado_div:.2f} sua classificação é: {classificacao}")
 
         except ValueError:
+            tkinter.messagebox.showerror
         #se caso o try nao estiver dando certo ele vai imprimir isso
+            #elif para assim q acha o res
             self.label_erro.config(text="⚠️ Digite números válidos e positivos, use '.' e não letras.")
         
 
