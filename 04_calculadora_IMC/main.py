@@ -1,19 +1,5 @@
-import ttkbootstrap as ttk
-class main():
-    def __init__(self):
+from classes import Classes
 
-        self.main = ttk.Window(themename="solar",
-                               title="Calculador de IMC"
-                               )
-        
+app = Classes()
 
-        self.main.geometry("600x800")
-
-        #titulo cima
-        self.Label_titulo = ttk.Label(self.main,
-                                      text="Calculadora IMC",
-                                      font=("Times-New-Roman",40))
-
-
-
-
+app.run()
