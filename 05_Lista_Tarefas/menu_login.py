@@ -1,6 +1,8 @@
 import ttkbootstrap as ttk
 import tkinter.messagebox
+from menu_lista import Menu_lista
 class Menu_login():
+   #o sel.menu_login é o nome da janela
    def __init__(self):
       self.menu_login = ttk.Window(themename="superhero",
                                   title="Tela de Login")
@@ -43,7 +45,7 @@ class Menu_login():
       frame_botao.pack()
 
       ttk.Button(frame_botao, text="LOGAR",width=30, command=self.conferir).pack(side="left", padx=20, pady=(20,0))
-      ttk.Button(frame_botao, text="SAIR",width=30, command=self.menu_login.destroy).pack(side="right",padx=20, pady=(20,0))
+      ttk.Button(frame_botao, text="SAIR",width=30, command=self.sair).pack(side="right",padx=20, pady=(20,0))
 
           #loguin erradi
 
@@ -55,33 +57,24 @@ class Menu_login():
 
 #esse message box aparece um acaixinha de texto
       if usuario == "Godofredo" and senha == "amogirassol":
-         tkinter.messagebox.showwarning(message="Login correto")
+         self.menu_login.destroy()
+         janela_tarefas = Menu_lista()
+         janela_tarefas.run()
+         
       else:
          tkinter.messagebox.showerror(message="Login e senha Incorreto")
 
-
-
-      
-
-      
-
-
-                             
-
-
-
-
-
-
-      
-
-
-
-
-
+   def sair(self):
+      resposta = tkinter.messagebox.askyesno(title="Sair", message="Tem certeza que deseja sair?")
+      if resposta == True:
+         exit()
 
    def run(self):
       self.menu_login.mainloop()
+
+if __name__ == "__main__":
+   login = Menu_login()
+   login.run()
 
 
 
