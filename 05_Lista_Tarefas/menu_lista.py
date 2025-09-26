@@ -69,8 +69,7 @@ class Menu_lista:
         self.texto = self.lista.get(self.indice) #pega o texto para selecionar
         if self.selec:
             self.lista.delete(self.indice) #Remove o item da Listbox temporariamente para substituir pelo texto
-            self.lista.insert(self.indice, self.texto + "[CONCLUÍDO] ") #Insere novamente o texto,[CONCLUÍDO] na frente.
-
+            self.lista.insert(self.indice, self.texto + "✅") #Insere novamente o texto, mas agora com simbolo concluirod
 
 #mantendo a janela rodando
     def run(self):
