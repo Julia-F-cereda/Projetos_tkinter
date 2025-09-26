@@ -7,7 +7,7 @@ class Menu_login():
       self.menu_login = ttk.Window(themename="superhero",
                                   title="Tela de Login")
       
-      self.menu_login.geometry("600x800")
+      self.menu_login.geometry("1920x1080")
 
       #Label titulo de cima login
       self.Label_titulo = ttk.Label(self.menu_login,
@@ -43,9 +43,9 @@ class Menu_login():
       #botão para logar
       frame_botao = ttk.Frame()
       frame_botao.pack()
-
       ttk.Button(frame_botao, text="LOGAR",width=30, command=self.conferir).pack(side="left", padx=20, pady=(20,0))
       ttk.Button(frame_botao, text="SAIR",width=30, command=self.sair).pack(side="right",padx=20, pady=(20,0))
+     
 
           #loguin erradi
 
@@ -56,7 +56,7 @@ class Menu_login():
       senha = (self.entry_senha.get())
 
 #esse message box aparece um acaixinha de texto
-      if usuario == "Godofredo" and senha == "amogirassol":
+      if usuario == "Julia" and senha == "abcde":
          self.menu_login.destroy()
          janela_tarefas = Menu_lista()
          janela_tarefas.run()
