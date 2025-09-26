@@ -1,6 +1,8 @@
 import ttkbootstrap as ttk
 import tkinter as tk
 from tkinter import Listbox
+import tkinter.messagebox 
+import sqlite3
 class Menu_lista:
     def __init__(self):
 #abrindo a janela
@@ -57,19 +59,23 @@ class Menu_lista:
 
 #def para excluir a tarefa selecionada
     def excluir(self):
-        self.selecionado = self.lista.curselection()  # pega o índice do item selecionado
-        if self.selecionado:  # se algum item estiver selecionado
-          self.lista.delete(self.selecionado[0])
+      self.selecionado = self.lista.curselection()  # pega o índice do item selecionado
+      if self.selecionado:  # se algum item estiver selecionado
+        self.lista.delete(self.selecionado[0])
+
+      else:
+        tk.messagebox.showerror(message="Selecione o item que quer excluir")
 
 #def para marcar tarefa
     def concluir(self):
-      self.selec= self.lista.curselection() #para selecionar a linha que quer concluir
-      if self.selec:
-        self.indice = self.selec[0] #pega o item por "numero"
-        self.texto = self.lista.get(self.indice) #pega o texto para selecionar
-        if self.selec:
-            self.lista.delete(self.indice) #Remove o item da Listbox temporariamente para substituir pelo texto
-            self.lista.insert(self.indice, self.texto + "✅") #Insere novamente o texto, mas agora com simbolo concluirod
+      self.conclu_selecionado= self.lista.curselection() #para selecionar a linha que quer concluir
+      if self.conclu_selecionado:
+        self.numero = self.conclu_selecionado[0] #pega o item por "numero"
+        self.texto = self.lista.get(self.numero) #pega o texto para selecionar
+        self.lista.delete(self.numero) #tira o texto antigo
+        self.lista.insert(self.numero, self.texto + "✅") #poe o texto mas com o certinho
+      else:
+        tk.messagebox.showerror(message="Selecione o item que quer marcar como concluido")
 
 #mantendo a janela rodando
     def run(self):
