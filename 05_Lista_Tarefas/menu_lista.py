@@ -13,48 +13,7 @@ class Menu_lista:
       #tamanho da tela
       self.menu_lista.geometry("1920x1080")
 
-      #conectando no banco de dados
-      conexao = sqlite3.connect("05_Lista_Tarefas/bd_lista_tarefa.sqlite")
-
-      #cursor responsavel pelo banoc de dados
-      cursor = conexao.cursor()
-
-      #criando as informações da tabela
-      sql_criar_tabela = """
-                              CREATE TABLE IF NOT EXISTS tarefa (
-                              codigo integer primary key autoincrement, 
-                              descricao_tarefa varchar(200)
-                              );
-                              """
-      #para executar a tabela
-      cursor.execute(sql_criar_tabela)
-      conexao.commit()
-
-      #para fechar o cursor
-      cursor.close()
-      conexao.close()
-
-       #conectando no banco de dados
-      conexao_select = sqlite3.connect("05_Lista_Tarefas/bd_lista_tarefa.sqlite")
-
-      #cursor responsavel pelo banoc de dados
-      cursor_select = conexao_select.cursor()
-
-      #criando as informações da tabela
-      sql_select_tabela = """
-                           
-                              );
-                              """
-      #para executar a tabela
-      cursor_select.execute(sql_select_tabela)
-      conexao_select.commit()
-
-      #para fechar o cursor
-      cursor_select.close()
-      conexao_select.close()
-
       
-
       #titulo
       self.titulo_lista = ttk.Label(self.menu_lista,
                                      text="Minha Lista De Tarefas",
@@ -92,13 +51,70 @@ class Menu_lista:
       self.botao_concluir = ttk.Button(self.frame_final, text="Concluir", padding="10", command= self.concluir)
       self.botao_concluir.pack(side="right", padx=10, pady=10)
 
+#######################################################################################################################################
+      conexao = sqlite3.connect("05_Lista_Tarefas/bd_lista_tarefa.sqlite")
+
+      #cursor responsavel pelo banoc de dados
+      cursor = conexao.cursor()
+
+      
+      #criando as informações da tabela
+      #para criar tabela
+      sql_criar_tabela = """
+                              CREATE TABLE IF NOT EXISTS tarefa (
+                              codigo integer primary key autoincrement, 
+                              descricao_tarefa varchar(200)
+                              );
+                              """
+      #para executar a tabela
+      cursor.execute(sql_criar_tabela)
+      conexao.commit()
+
+      #para fechar o cursor
+      cursor.close()
+      conexao.close()
+
+      self.atualizar_lista()
+     
+#######################################################################################################################################
+      #cursor responsavel pelo banoc de dados
+      conexao_select = sqlite3.connect("05_Lista_Tarefas/bd_lista_tarefa.sqlite")
+
+      cursor_select = conexao_select.cursor()
+
+      #criando as informações da tabela
+      sql_select_tabela = """
+                          SELECT codigo, descricao_tarefa FROM tarefa;
+                              """
+      #para executar a tabela
+
+      cursor_select.execute(sql_select_tabela)
+      lista_de_tarefas = cursor_select.fetchall()
+
+      #para fechar o cursor
+      cursor_select.close()
+      conexao_select.close()
+
+      for linha in lista_de_tarefas:
+        self.lista.insert("end",linha[1])
+
+
+    def atualizar_lista(self):
+      #esse é para fazr um select
+      conexao_select = sqlite3.connect("05_Lista_Tarefas/bd_lista_tarefa.sqlite")
+
+
+
+##########################################################################################################################################
+
 #botando as informações da caixa de texto na listbox
     def adicionando(self):
       self.texto = self.caixa_tarefa.get()
       self.lista.insert(tk.END, self.texto)  # adiciona a escrita no final da lista
       self.caixa_tarefa.delete(0, tk.END)  #para limpar a caixa de texto automaticamnete
 
-      #criando a ocnexao
+#criando o sql para adicionar as tarefas
+       #criando a ocnexao
       conexao_adiciona = sqlite3.connect("05_Lista_Tarefas/bd_lista_tarefa.sqlite")
 
       #criando o cursor
@@ -124,6 +140,20 @@ class Menu_lista:
 
       else:
         tk.messagebox.showerror(message="Selecione o item que quer excluir")
+
+        conexao_delete = sqlite3.connect("05_Lista_Tarefas/bd_lista_tarefa.sqlite")
+
+        cursor_delete = conexao_delete.cursor()
+
+        sql_delete_tabela = """
+                            
+                            """
+        cursor_delete.execute(sql_delete_tabela)
+        
+        
+
+
+      
 
 #def para marcar tarefa  
     def concluir(self):
