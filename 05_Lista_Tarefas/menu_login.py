@@ -47,15 +47,12 @@ class Menu_login():
       ttk.Button(frame_botao, text="SAIR",width=30, command=self.sair).pack(side="right",padx=20, pady=(20,0))
      
 
-          #loguin erradi
-
-
-      
+      #loguin erradi
    def conferir(self):
       usuario = (self.entry_usuario.get())
       senha = (self.entry_senha.get())
 
-#esse message box aparece um acaixinha de texto
+      #esse message box aparece um acaixinha de texto
       if usuario == "Julia" and senha == "abcde":
          self.menu_login.destroy()
          janela_tarefas = Menu_lista()
